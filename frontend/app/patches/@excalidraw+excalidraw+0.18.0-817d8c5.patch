@@ -1,0 +1,26 @@
+diff --git a/node_modules/@excalidraw/excalidraw/dist/dev/chunk-3SN6HYVK.js b/node_modules/@excalidraw/excalidraw/dist/dev/chunk-3SN6HYVK.js
+index 1b4a68d..5a7f8ed 100644
+--- a/node_modules/@excalidraw/excalidraw/dist/dev/chunk-3SN6HYVK.js
++++ b/node_modules/@excalidraw/excalidraw/dist/dev/chunk-3SN6HYVK.js
+@@ -14904,7 +14904,7 @@ var getTextFromElements = (elements, separator = "\n\n") => {
+ };
+ 
+ // scene/export.ts
+-import rough3 from "roughjs/bin/rough";
++import rough3 from "roughjs";
+ 
+ // data/url.ts
+ import { sanitizeUrl } from "@braintree/sanitize-url";
+diff --git a/node_modules/@excalidraw/excalidraw/dist/dev/index.js b/node_modules/@excalidraw/excalidraw/dist/dev/index.js
+index d63ee35..5e9d98a 100644
+--- a/node_modules/@excalidraw/excalidraw/dist/dev/index.js
++++ b/node_modules/@excalidraw/excalidraw/dist/dev/index.js
+@@ -924,7 +924,7 @@ var InitializeApp = (props) => {
+ // components/App.tsx
+ import React43, { useContext as useContext3 } from "react";
+ import { flushSync as flushSync2 } from "react-dom";
+-import rough from "roughjs/bin/rough";
++import rough from "roughjs";
+ import clsx55 from "clsx";
+ import { nanoid } from "nanoid";
+ 

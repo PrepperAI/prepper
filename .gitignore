@@ -1,0 +1,21 @@
+# --- FRONTEND (React) ---
+frontend/app/node_modules/
+frontend/build/
+frontend/app/.env
+frontend/.env
+
+# --- BACKEND (FastAPI/Python) ---
+backend/__pycache__/
+backend/.venv/
+backend/env/
+backend/.env
+backend/app/.env
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/app/node_modules/
+
+# --- GENERAL ---
+.env
+*.log
+.DS_Store
+dump.rdb

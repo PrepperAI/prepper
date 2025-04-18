@@ -1,0 +1,94 @@
+/* File: src/pages/BehavioralInterviewLandingPage.module.css */
+
+.behavioralContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Header Section */
+.headerSection {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #c084fc; /* Soft purple */
+  text-shadow: none;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #94a3b8; /* Neutral slate */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Grid Layout */
+.optionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+/* Card Styling */
+.card {
+  background-color: #1f1f2e;
+  border: 1px solid #2e2e3e;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25); /* Subtle purple glow */
+}
+
+.card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+/* Button Styling */
+.startButton {
+  background-color: #8b5cf6; /* Professional purple */
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.startButton:hover {
+  background-color: #7c3aed; /* Slightly darker purple */
+  transform: translateY(-1px);
+}
+
+/* Logo */
+.companyLogo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  vertical-align: middle;
+}

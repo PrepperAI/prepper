@@ -1,0 +1,332 @@
+.wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #0a0a0a; /* Dark background to match TechnicalInterview */
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  overflow: hidden;
+}
+
+.canvasArea {
+  flex: 3.7; /* Using the same ratio as TechnicalInterview */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow: hidden;
+  margin-top: 75px; /* Space for fixed header */
+}
+
+.questionBox {
+  background-color: rgba(18, 19, 29, 0.8);
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #2d2f3b;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.sidebar {
+  flex: 1; /* Using the same ratio as TechnicalInterview */
+  background-color: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #2d2f3b;
+  overflow: hidden;
+  margin-top: 75px; /* Space for the header */
+}
+
+/* This will be at the top of page similar to TechnicalInterview */
+.clockRow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 2rem;
+  background-color: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.endButton {
+  background: #ff4f4f;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 79, 79, 0.33);
+  transition: all 0.2s ease;
+}
+
+.endButton:hover {
+  background: #e64040;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 79, 79, 0.4);
+}
+
+.endButton:active {
+  transform: translateY(0);
+}
+
+/* Scrollable content area */
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  gap: 16px;
+  align-items: flex-start; /* Align items at the top */
+  padding-top: 1rem;
+}
+
+.avatarBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.avatarBox > * {
+  width: 100%;
+  max-width: 250px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.avatarBox > *:first-child {
+  border: 4px solid rgba(160, 102, 255, 0.5) !important; /* Purple border for AI */
+}
+
+.avatarBox > *:last-child {
+  border: 4px solid rgba(0, 234, 255, 0.5) !important; /* Blue border for user */
+}
+
+.avatarBox video,
+.avatarBox iframe,
+.avatarBox canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: none !important;
+}
+
+/* Scrollable feedback log */
+.feedbackWrapper {
+  flex-grow: 1;
+  width: 100%;
+  max-height: 330px; /* Generous height for transcript */
+  overflow-y: auto;
+}
+
+.feedback {
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: rgba(18, 19, 29, 0.8);
+  border: 1px solid #2d2f3b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: #00eaff #1c1e2a;
+}
+
+.feedback::-webkit-scrollbar {
+  width: 6px;
+  background-color: #1c1e2a;
+  border-radius: 3px;
+}
+
+.feedback::-webkit-scrollbar-thumb {
+  background-color: #00eaff;
+  border-radius: 3px;
+}
+
+/* User and AI messages */
+.userEntry,
+.aiEntry {
+  margin-bottom: 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Loading overlay styles */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 10, 0.8);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.loader {
+  border: 3px solid rgba(160, 102, 255, 0.2);
+  border-top: 3px solid #a066ff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingOverlay p {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.loadingSubtext {
+  font-size: 0.9rem !important;
+  opacity: 0.7;
+  margin-top: 0 !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userEntry {
+  background-color: rgba(0, 108, 163, 0.2);
+  border-left: 3px solid #00eaff;
+}
+
+.userEntry strong {
+  color: #00eaff;
+}
+
+.aiEntry {
+  background-color: rgba(77, 39, 119, 0.2);
+  border-left: 3px solid #a066ff;
+}
+
+.aiEntry strong {
+  color: #a066ff;
+}
+
+/* System messages */
+.systemEntry {
+  background-color: rgba(50, 50, 50, 0.3) !important;
+  border-left: 3px solid #777 !important;
+  font-style: italic;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-bottom: 0.75rem;
+}
+
+.noteText {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* AI Speaking indicator */
+.aiSpeakingIndicator {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(160, 102, 255, 0.2);
+  border: 1px solid #a066ff;
+  border-radius: 15px;
+  color: #a066ff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: pulse 2s infinite;
+  z-index: 100;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.aiSpeakingIndicator::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #a066ff;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .canvasArea {
+    flex: 1;
+    min-height: 60vh;
+    margin-top: 85px; /* More space on mobile */
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-top: 0;
+    border-left: none;
+    border-top: 1px solid #2d2f3b;
+  }
+
+  .feedbackWrapper {
+    max-height: 150px;
+  }
+}

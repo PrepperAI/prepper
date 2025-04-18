@@ -1,0 +1,497 @@
+/* BehavioralInterview.module.css */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #0a0a0a;
+  color: white;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.videoSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50vh; /* Reduce height further */
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  margin-top: 85px; /* Increase top margin significantly */
+  box-sizing: border-box;
+}
+
+/* Adjust video sizing and positioning */
+.videoSection > div {
+  height: 100% !important;
+  max-height: 45vh !important;
+  width: 48% !important;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 234, 255, 0.5) !important; /* Increased from 2px to 4px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make sure videos inside these containers are fully displayed */
+.videoSection video,
+.videoSection iframe,
+.videoSection canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* This ensures the video isn't cropped */
+  border: none !important;
+}
+/* Specific styling for left and right videos if needed */
+.videoSection > div:first-child {
+  /* Left video (AI) */
+  border-color: rgba(
+    160,
+    102,
+    255,
+    0.5
+  ) !important; /* Purple tint for AI side */
+}
+
+.videoSection > div:last-child {
+  /* Right video (User) */
+  border-color: #00eaff !important; /* Blue tint for user side */
+}
+
+/* Ensure the header bar is tall enough and doesn't overlap */
+.clockRow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px; /* Increase height more */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 2rem;
+  background-color: rgba(10, 10, 10, 0.98); /* Make more opaque */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.endButton {
+  background: #ff4f4f;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 79, 79, 0.33);
+  transition: all 0.2s ease;
+}
+
+.endButton:hover {
+  background: #e64040;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 79, 79, 0.4);
+}
+
+.endButton:active {
+  transform: translateY(0);
+}
+
+/* Transcript area styling */
+.transcriptScroll {
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 1200px;
+  height: 30vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: rgba(18, 19, 29, 0.8);
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.1);
+  border: 1px solid #2d2f3b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #fff;
+  transition: all 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: #00eaff #1c1e2a;
+}
+
+.transcriptScroll::-webkit-scrollbar {
+  width: 8px;
+  background-color: #1c1e2a;
+  border-radius: 4px;
+}
+
+.transcriptScroll::-webkit-scrollbar-thumb {
+  background-color: #00eaff;
+  border-radius: 4px;
+}
+
+/* Messages styling */
+.userEntry,
+.aiEntry {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  position: relative;
+  transition: all 0.2s ease;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userEntry {
+  background-color: rgba(0, 108, 163, 0.2);
+  border-left: 4px solid #00eaff;
+  margin-left: 2rem;
+  margin-right: 0.5rem;
+}
+
+.userEntry strong {
+  color: #00eaff;
+}
+
+.aiEntry {
+  background-color: rgba(77, 39, 119, 0.2);
+  border-left: 4px solid #a066ff;
+  margin-right: 2rem;
+  margin-left: 0.5rem;
+}
+
+.aiEntry strong {
+  color: #a066ff;
+}
+
+/* System messages */
+.userEntry:has(strong:contains("System")),
+.aiEntry:has(strong:contains("System")) {
+  background-color: rgba(50, 50, 50, 0.3);
+  border-left: 4px solid #aaa;
+  font-style: italic;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Add avatar indicators */
+.userEntry::before,
+.aiEntry::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  top: -10px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #1c1e2a;
+}
+
+.userEntry::before {
+  right: -10px;
+  background-color: #00eaff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23111'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E");
+}
+
+.aiEntry::before {
+  left: -10px;
+  background-color: #a066ff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23111'%3E%3Cpath d='M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79 2.73 2.71 7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58 3.51-3.47 9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z'/%3E%3C/svg%3E");
+}
+
+/* Status indicator for AI speaking */
+.aiSpeakingIndicator {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 0.5rem 1rem;
+  background-color: rgba(160, 102, 255, 0.2);
+  border: 1px solid #a066ff;
+  border-radius: 20px;
+  color: #a066ff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: pulse 2s infinite;
+  z-index: 100;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.aiSpeakingIndicator::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #a066ff;
+}
+
+/* Reaction Bar Styles */
+.reactionBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  background-color: rgba(28, 30, 42, 0.5);
+  border-radius: 30px;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(160, 102, 255, 0.2);
+}
+
+.reactionLabel {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 1rem;
+}
+
+.reactionEmoticons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.reactionButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.reactionButton:hover {
+  transform: scale(1.2);
+  opacity: 1;
+  background-color: rgba(160, 102, 255, 0.2);
+}
+
+.reactionButton.selected {
+  background-color: rgba(160, 102, 255, 0.3);
+  box-shadow: 0 0 10px rgba(160, 102, 255, 0.5);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Loading subtext style */
+.loadingSubtext {
+  font-size: 0.9rem !important;
+  opacity: 0.7;
+  margin-top: 0 !important;
+}
+
+/* Typing indicator animation styles */
+.typingIndicator {
+  background-color: rgba(77, 39, 119, 0.1) !important;
+  border-left: 4px solid rgba(160, 102, 255, 0.3) !important;
+  padding: 0.7rem 1.2rem !important;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.typingDots {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+}
+
+.typingDots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #a066ff;
+  margin-right: 5px;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typingDots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typingDots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingDots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* Note text styling */
+.noteText {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* Special styling for the system messages */
+div[class*="userEntry"]:has(strong:contains("System")),
+div[class*="aiEntry"]:has(strong:contains("System")) {
+  background-color: rgba(50, 50, 50, 0.3);
+  border-left-color: #777;
+  font-style: italic;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Loading animation for initializing state */
+.initializing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 10, 0.8);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.loader {
+  border: 3px solid rgba(160, 102, 255, 0.2);
+  border-top: 3px solid #a066ff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.initializing p {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Fade-in animation for new entries */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.newMessage {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* AI Thinking animation */
+.aiThinking {
+  position: relative;
+  padding-right: 30px;
+}
+
+.aiThinking::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a066ff'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E");
+  background-size: contain;
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .videoSection {
+    flex-direction: column;
+    height: auto;
+    margin-top: 85px;
+  }
+
+  .videoSection > div {
+    width: 100% !important;
+    height: 40vh !important;
+    max-height: 40vh !important;
+    margin-bottom: 1rem;
+  }
+
+  .transcriptScroll {
+    height: 40vh;
+  }
+
+  .userEntry,
+  .aiEntry {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .reactionBar {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .reactionLabel {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}

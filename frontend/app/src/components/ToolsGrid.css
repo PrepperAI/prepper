@@ -1,0 +1,46 @@
+.tools-grid-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom right, #0f1117, #101e33);
+  color: white;
+}
+
+.tools-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #00f7ff;
+  text-shadow: 0 0 6px #00f7ff;
+}
+
+.tools-subtext {
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  color: #a0dfff;
+  font-size: 1rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.tool-card {
+  background: rgba(0, 255, 255, 0.07);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #00eaff;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.tool-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}

@@ -1,0 +1,22 @@
+.container {
+  flex: 1;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #2d2d2d;
+}
+
+.list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.bullet {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.bullet:hover {
+  color: #a78bfa;
+}

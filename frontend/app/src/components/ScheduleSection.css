@@ -1,0 +1,53 @@
+/* src/components/ScheduleSection.css */
+
+.schedule-section {
+  padding: 5rem 2rem;
+  background: radial-gradient(circle at top, #10141c, #06080f);
+  color: white;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #66d9ef;
+  text-shadow: 0 0 10px #66d9ef90;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtext {
+  font-size: 1.1rem;
+  color: #bbb;
+  margin-bottom: 2.5rem;
+}
+
+.schedule-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.schedule-form input,
+.schedule-form select {
+  padding: 0.8rem 1rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1e1e1e;
+  color: white;
+  font-size: 1rem;
+}
+
+.schedule-form button {
+  background: #66d9ef;
+  color: black;
+  font-weight: bold;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.schedule-form button:hover {
+  background: #81e3f6;
+}

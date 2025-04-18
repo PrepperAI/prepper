@@ -1,0 +1,20 @@
+.container {
+  padding: 2rem;
+  background-color: #0d0d0d;
+  color: #fff;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  font-size: 2rem;
+  color: #9f7aea;
+  margin-bottom: 1.5rem;
+}
+
+.editorSection {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 2rem;
+}

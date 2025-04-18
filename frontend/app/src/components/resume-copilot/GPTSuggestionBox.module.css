@@ -1,0 +1,36 @@
+.box {
+  margin-top: 12px;
+  background-color: #1e1e2e;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  color: #eee;
+}
+
+.box button {
+  padding: 8px 14px;
+  background-color: #4b8aff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.box button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.suggestions {
+  list-style: disc;
+  padding-left: 18px;
+  margin-top: 12px;
+  color: #cfcfcf;
+}
+
+.error {
+  color: #ff5f5f;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}

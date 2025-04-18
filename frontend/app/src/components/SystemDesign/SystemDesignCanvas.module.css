@@ -1,0 +1,144 @@
+.canvasContainer {
+  width: 100%;
+  height: calc(
+    100vh - 180px
+  ); /* Adjust to leave space for question header and fixed top header */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #121212; /* Dark background */
+  border-radius: 8px;
+  border: 1px solid #2d2f3b;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.excalidrawWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+/* Additional styles to make the Excalidraw UI match our theme */
+:global(.excalidraw .App-menu-content) {
+  background-color: #1a1a1a !important;
+}
+
+:global(.excalidraw .Island) {
+  background-color: #1a1a1a !important;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+:global(.excalidraw .ToolIcon__icon) {
+  background-color: #232323 !important;
+}
+
+:global(.excalidraw .ToolIcon_type_button:hover) {
+  background-color: #333 !important;
+}
+
+:global(.excalidraw-container) {
+  height: 100% !important;
+}
+
+/* Make sure Excalidraw canvas takes full height */
+:global(.excalidraw .layer-ui__wrapper) {
+  z-index: 10;
+}
+
+:global(.excalidraw .App-toolbar) {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Make scrollbar match the dark theme */
+:global(.excalidraw .scrollbar__container scrollbar__thumb) {
+  background-color: #444;
+}
+
+/* Give a better appearance to buttons */
+:global(.excalidraw .ToolIcon_size_medium) {
+  border-radius: 4px;
+}
+
+/* Hide the question mark help button */
+:global(.excalidraw .help-icon) {
+  display: none !important;
+}
+
+/* Hide the library button */
+:global(.excalidraw .library-button) {
+  display: none !important;
+}
+
+/* Alternative selectors if the above don't work */
+:global([data-testid="help-menu-button"]) {
+  display: none !important;
+}
+
+:global([data-testid="library-menu-button"]) {
+  display: none !important;
+}
+
+/* Try these as well */
+:global(.excalidraw-button-library),
+:global(.excalidraw-button-help) {
+  display: none !important;
+}
+/* Hide the help menu item button */
+:global(button[data-testid="help-menu-item"]) {
+  display: none !important;
+}
+
+/* Hide the Excalidraw links group */
+:global(.dropdown-menu-group) {
+  display: none !important;
+}
+
+/* If you need more specificity for the links group */
+:global(div.dropdown-menu-group:has(p.dropdown-menu-group-title)) {
+  display: none !important;
+}
+
+/* Alternative targeting for the links section */
+:global(p.dropdown-menu-group-title:contains("Excalidraw links")),
+:global(p.dropdown-menu-group-title) {
+  display: none !important;
+}
+
+/* If needed, you might want to specify the width */
+:global(div.Island) {
+  /* Adjust the width as needed */
+  width: 300px; /* or whatever width you want */
+}
+
+/* Make sure the parent container allows for absolute positioning */
+:global(.excalidraw .App-bottom-bar),
+:global(.excalidraw) {
+  position: relative;
+}
+/* Ensure text elements are visible on dark background */
+:global(.excalidraw .text-element) {
+  color: #ffffff !important; /* Change to your desired text color */
+}
+
+/* Force all text in Excalidraw to be white */
+:global(.excalidraw .TextElement-container) {
+  color: white !important;
+}
+
+:global(.excalidraw .TextElement) {
+  fill: white !important;
+}
+
+:global(.excalidraw .Layer-text *) {
+  color: white !important;
+  fill: white !important;
+}
+
+:global(.excalidraw text) {
+  fill: white !important;
+}
+
+/* Ensure any new text is also white */
+:global(.excalidraw-textEditing) {
+  color: white !important;
+}

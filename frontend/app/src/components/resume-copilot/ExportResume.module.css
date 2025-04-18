@@ -1,0 +1,13 @@
+.container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}

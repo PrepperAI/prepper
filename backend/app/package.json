@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "microsoft-cognitiveservices-speech-sdk": "^1.42.0",
+    "pdfjs-dist": "^5.0.375"
+  }
+}

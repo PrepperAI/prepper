@@ -1,0 +1,17 @@
+.container {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #2d2d2d;
+  margin-bottom: 1rem;
+}
+
+.textarea {
+  width: 100%;
+  background-color: #0f0f0f;
+  color: white;
+  border: 1px solid #333;
+  padding: 0.8rem;
+  border-radius: 6px;
+  resize: vertical;
+}

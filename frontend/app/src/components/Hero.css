@@ -1,0 +1,89 @@
+/* src/components/Hero.css */
+
+.hero-section {
+  background: radial-gradient(circle at top left, #1f1f2e, #0d0d16);
+  padding: 6rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(167, 139, 250, 0.3),
+    transparent 70%
+  );
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-family: "Orbitron", sans-serif;
+  line-height: 1.3;
+  margin-bottom: 1.2rem;
+}
+
+.hero-content .highlight {
+  color: #a78bfa;
+  text-shadow: 0 0 10px #a78bfa88;
+}
+
+.subtext {
+  font-size: 1.1rem;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: white;
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, #5b21b6, #8b5cf6);
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 2px solid #a78bfa;
+  color: #a78bfa;
+}
+
+.secondary-btn:hover {
+  background-color: #1a1a2e;
+}

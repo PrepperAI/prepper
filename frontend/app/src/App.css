@@ -1,0 +1,17 @@
+/* In index.css or App.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0a0b10;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  background: #0a0b10;
+  color: #fff;
+}
+
+#root {
+  height: 100%;
+}
