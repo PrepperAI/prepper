@@ -65,6 +65,7 @@
   font-size: 1rem;
   cursor: pointer;
   transition: 0.2s ease;
+  justify-content: center;
 }
 
 .schedule-form button:hover {
@@ -243,35 +244,176 @@
   background-color: #1f1f2e;
 }
 
+/* Reset navigation buttons - add this to your CSS */
+.react-datepicker__navigation {
+  position: absolute;
+  top: 10px;
+  padding: 0;
+  background: none !important; /* Force remove background */
+  border: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
 .react-datepicker__navigation--previous {
-  left: 10px;
+  left: 0px;
+  width: 10px;
 }
 
 .react-datepicker__navigation--next {
-  right: 10px;
+  right: 0px;
 }
 
+/* Fix navigation icons */
 .react-datepicker__navigation-icon {
-  font-size: 0.75rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  border: none;
+  background: none !important;
 }
 
 .react-datepicker__navigation-icon::before {
   content: "";
   display: block;
-  width: 6px;
-  height: 6px;
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
   border-style: solid;
   border-width: 2px 2px 0 0;
   border-color: #cbd5e1;
+  background: none !important;
+}
+
+.react-datepicker__navigation-icon--previous::before {
+  right: -7px;
+  transform: rotate(225deg);
+}
+
+.react-datepicker__navigation-icon--next::before {
+  left: -7px;
+  transform: rotate(45deg);
+}
+
+.react-datepicker__navigation {
+  gap: 10px;
+}
+button {
+  min-width: 2rem;
+}
+
+/* General Navigation Button Styles */
+.react-datepicker__navigation {
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.react-datepicker__navigation:hover {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+/* Icon Arrows */
+.react-datepicker__navigation-icon::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  border-color: #f1f5f9;
   transform: rotate(45deg);
   margin: auto;
 }
 
-.react-datepicker__navigation-icon--previous::before {
+/* Left Arrow (Previous) */
+.react-datepicker__navigation--previous
+  .react-datepicker__navigation-icon::before {
   transform: rotate(225deg);
+}
+
+/* Right Arrow (Next) */
+.react-datepicker__navigation--next .react-datepicker__navigation-icon::before {
+  transform: rotate(45deg);
+}
+
+.react-datepicker__navigation:hover {
+  background-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+.react-datepicker__navigation {
+  cursor: pointer;
+  padding: 0;
+  min-width: 32px;
+  min-height: 32px;
+}
+.react-datepicker__current-month {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #f1f5f9; /* optional: for better visibility in your dark theme */
+}
+.react-datepicker__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-datepicker__navigation--next--with-time:not(
+    .react-datepicker__navigation--next--with-today-button
+  ) {
+  right: 32%;
+}
+.react-datepicker__navigation--previous--with-time:not(
+    .react-datepicker__navigation--previous--with-today-button
+  ) {
+  left: 32%;
+}
+
+.react-datepicker__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.react-datepicker__navigation:hover {
+  background-color: rgba(139, 92, 246, 0.15);
+}
+
+/* This ensures the arrow itself is centered inside the span */
+.react-datepicker__navigation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 100%;
+  height: 100%; */
+}
+
+.react-datepicker__current-month {
+  font-size: 0rem; /* Smaller and more balanced */
+  font-weight: 500;
+  text-align: center;
+  color: #f1f5f9;
+  margin: 0.5rem 0;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: white;
 }

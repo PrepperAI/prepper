@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import BlockedModal from "../BlockedModal";
 import HeyGenAvatarStreamer from "../HeyGenAvatarStreamer";
 import { generateFeedback } from "../../utils/getFeedback";
+import { API_BASE_URL } from "../../utils/api";
 
 const BehavioralInterview = ({ config }) => {
   const { user } = useUser();
@@ -140,27 +141,24 @@ const BehavioralInterview = ({ config }) => {
           { role: "system", content: "Preparing your interview experience..." },
         ]);
 
-        const response = await fetch(
-          "http://localhost:8000/api/interview/init",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              session_id: sessionId.current,
-              interview_type: config?.interview_type || "behavioral",
-              role: config?.job_role || "Product Manager",
-              experience_level: config?.experience_level || "Entry",
-              company: config?.company || null,
-              stress_level: config?.stress || "Realistic",
-              style: config?.style || "Coach",
-              focus_areas: config?.focus_areas || [],
-              location: config?.location || "",
-              parsed_resume: config?.resume || "No resume provided.",
-              user_uid: user?.uid || null,
-              user_email: user?.email || null,
-            }),
-          }
-        );
+        const response = await fetch(`${API_BASE_URL}/api/interview/init`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: sessionId.current,
+            interview_type: config?.interview_type || "behavioral",
+            role: config?.job_role || "Product Manager",
+            experience_level: config?.experience_level || "Entry",
+            company: config?.company || null,
+            stress_level: config?.stress || "Realistic",
+            style: config?.style || "Coach",
+            focus_areas: config?.focus_areas || [],
+            location: config?.location || "",
+            parsed_resume: config?.resume || "No resume provided.",
+            user_uid: user?.uid || null,
+            user_email: user?.email || null,
+          }),
+        });
 
         if (!response.ok) throw new Error("Init request failed");
 
@@ -221,7 +219,7 @@ const BehavioralInterview = ({ config }) => {
         { role: "user", content: spokenTranscript },
       ]);
 
-      const response = await fetch("http://localhost:8000/api/interview", {
+      const response = await fetch(`${API_BASE_URL}/api/interview`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -299,7 +297,7 @@ const BehavioralInterview = ({ config }) => {
         },
       ]);
 
-      const response = await fetch("http://localhost:8000/api/interview", {
+      const response = await fetch(`${API_BASE_URL}/api/interview`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

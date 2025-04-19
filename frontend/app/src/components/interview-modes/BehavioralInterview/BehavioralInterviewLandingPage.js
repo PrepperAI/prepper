@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./BehavioralInterviewLandingPage.module.css";
 import { useNavigate } from "react-router-dom";
+import { Mic } from "lucide-react";
 
 const companies = [
   "Google",
@@ -51,7 +52,8 @@ const BehavioralInterviewLandingPage = () => {
 
       <div className={styles.optionGrid}>
         <div className={styles.card}>
-          <h3>🎤 General Mock Interview</h3>
+          <Mic size={18} style={{ marginRight: 8 }} />
+          <h3> General Mock Interview</h3>
           <p>Get randomly selected questions across categories and levels.</p>
           <button
             className={styles.startButton}

@@ -10,6 +10,7 @@ import HeyGenAvatarStreamer from "../HeyGenAvatarStreamer";
 import { useNavigate } from "react-router-dom";
 import { generateFeedback } from "../../utils/getFeedback";
 import TranscriptView from "../interview-modes/TranscriptView";
+import { API_BASE_URL } from "../../utils/api";
 // Loading overlay component
 const LoadingOverlay = ({
   message = "Preparing your system design interview...",
@@ -156,27 +157,24 @@ const SystemDesignInterview = ({ config }) => {
 
       setTranscript(spokenTranscript);
 
-      const res = await fetch(
-        "http://localhost:8000/api/interview/system-design",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId.current,
-            spoken_response: spokenTranscript,
-            canvas_data: canvasData || [],
-            interview_type: config?.interview_type || "system design",
-            job_role: config?.job_role || "Backend Engineer",
-            candidate_level: config?.experience_level || "Mid level",
-            resume: config?.resume || "No resume provided.",
-            style: config?.style || "Evaluator",
-            company: config?.company || "",
-            location: config?.location || "",
-            user_email: user?.email || "",
-            user_id: user?.uid || "",
-          }),
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}/api/interview/system-design`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionId.current,
+          spoken_response: spokenTranscript,
+          canvas_data: canvasData || [],
+          interview_type: config?.interview_type || "system design",
+          job_role: config?.job_role || "Backend Engineer",
+          candidate_level: config?.experience_level || "Mid level",
+          resume: config?.resume || "No resume provided.",
+          style: config?.style || "Evaluator",
+          company: config?.company || "",
+          location: config?.location || "",
+          user_email: user?.email || "",
+          user_id: user?.uid || "",
+        }),
+      });
 
       const data = await res.json();
       const spokenMessage = data.spoken_message || data.feedback;
@@ -223,7 +221,7 @@ const SystemDesignInterview = ({ config }) => {
     const startInterview = async () => {
       try {
         const res = await fetch(
-          "http://localhost:8000/api/interview/system-design/init",
+          `${API_BASE_URL}/api/interview/system-design/init`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -348,27 +346,24 @@ const SystemDesignInterview = ({ config }) => {
     ]);
 
     try {
-      const res = await fetch(
-        "http://localhost:8000/api/interview/system-design",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId.current,
-            spoken_response: farewellPrompt,
-            canvas_data: getCanvasImage() || [],
-            interview_type: config?.interview_type || "system design",
-            job_role: config?.job_role || "Backend Engineer",
-            candidate_level: config?.experience_level || "Mid level",
-            resume: config?.resume || "No resume provided.",
-            style: config?.style || "Evaluator",
-            company: config?.company || "",
-            location: config?.location || "",
-            user_email: user?.email || "",
-            user_id: user?.uid || "",
-          }),
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}/api/interview/system-design`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionId.current,
+          spoken_response: farewellPrompt,
+          canvas_data: getCanvasImage() || [],
+          interview_type: config?.interview_type || "system design",
+          job_role: config?.job_role || "Backend Engineer",
+          candidate_level: config?.experience_level || "Mid level",
+          resume: config?.resume || "No resume provided.",
+          style: config?.style || "Evaluator",
+          company: config?.company || "",
+          location: config?.location || "",
+          user_email: user?.email || "",
+          user_id: user?.uid || "",
+        }),
+      });
 
       const data = await res.json();
       const closingMessage =

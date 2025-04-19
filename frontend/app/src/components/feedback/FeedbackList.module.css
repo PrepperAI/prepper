@@ -7,6 +7,7 @@
   margin: 0 auto;
   color: #f1f5f9;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
 }
 
 /* === Section Header === */
@@ -135,6 +136,8 @@
   margin: auto;
   border: 1px solid rgba(99, 102, 241, 0.2);
   backdrop-filter: blur(8px);
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .modalActions {
@@ -209,17 +212,195 @@
 
 .modalContent ul {
   padding-left: 1.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .modalContent li {
   margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  word-break: break-word;
 }
 
 .modalContent a {
   color: #a78bfa;
   text-decoration: none;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .modalContent a:hover {
   text-decoration: underline;
+}
+
+/* Optional: make modal scroll on very small screens */
+@media (max-width: 600px) {
+  .modalContent {
+    max-height: 90vh;
+    padding: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .modalContent h3 {
+    font-size: 1.25rem;
+  }
+
+  .modalContent h4 {
+    font-size: 1rem;
+  }
+
+  .modalContent li {
+    font-size: 0.9rem;
+  }
+}
+
+/* Additional responsive utilities */
+@media (max-width: 1024px) {
+  .scheduleTable {
+    font-size: 0.9rem;
+  }
+
+  .scheduleTable th,
+  .scheduleTable td {
+    padding: 1rem;
+  }
+}
+
+/* Tablet responsiveness */
+@media (max-width: 900px) {
+  .scheduleContainer {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .scheduleTable th,
+  .scheduleTable td {
+    padding: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .scheduleTable button {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.25rem;
+  }
+}
+
+/* Fixed mobile styles for table */
+@media (max-width: 768px) {
+  .scheduleContainer {
+    padding: 1.5rem 1rem;
+  }
+
+  .scheduleTable thead {
+    display: none;
+  }
+
+  .scheduleTable,
+  .scheduleTable tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .scheduleTable tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: #23233a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+
+  .scheduleTable tr::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #8b5cf6, #6366f1);
+    border-radius: 0.75rem 0 0 0.75rem;
+  }
+
+  .scheduleTable td {
+    display: block;
+    text-align: right;
+    padding: 0.75rem 1rem 0.75rem 8rem; /* Add space for label */
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: transparent;
+    border-radius: 0;
+    min-height: 2.5rem;
+    font-size: 0.85rem;
+  }
+
+  .scheduleTable td:first-child {
+    border-radius: 0;
+  }
+
+  .scheduleTable td:first-child::before {
+    display: none; /* Remove the left border since we moved it to the tr */
+  }
+
+  .scheduleTable td:last-child {
+    border-bottom: none;
+    text-align: right;
+    border-radius: 0;
+    padding-top: 0.75rem;
+  }
+
+  .scheduleTable td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    text-align: left;
+    width: 6.5rem;
+  }
+
+  .scheduleTable button {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    width: auto;
+    height: auto;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  /* Add text to button for better UX */
+  .scheduleTable button svg {
+    margin-right: 0.25rem;
+  }
+
+  .scheduleTable button::after {
+    content: "View";
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .scheduleContainer {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .scheduleTable td {
+    padding: 0.65rem 0.75rem 0.65rem 7.5rem;
+    font-size: 0.8rem;
+  }
+
+  .scheduleTable td::before {
+    font-size: 0.7rem;
+    width: 6rem;
+  }
 }

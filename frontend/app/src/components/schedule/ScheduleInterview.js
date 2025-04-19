@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { CalendarPlus, ArrowRight, Clock } from "lucide-react";
 import "./ScheduleInterview.css";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../utils/api";
 
 const generateGoogleCalendarLink = (startDate, durationMinutes = 30) => {
   const start = new Date(startDate);
@@ -53,7 +54,7 @@ const ScheduleInterview = () => {
     const time = dateTime.toTimeString().split(" ")[0].slice(0, 5);
 
     try {
-      const res = await fetch("http://localhost:8000/api/schedule", {
+      const res = await fetch(`${API_BASE_URL}/api/schedule`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

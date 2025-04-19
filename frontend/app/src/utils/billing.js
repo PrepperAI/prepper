@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./api";
+
 export const cancelSubscription = async (user_id) => {
   try {
-    const res = await fetch("http://localhost:8000/api/cancel-subscription", {
+    const res = await fetch(`${API_BASE_URL}/api/cancel-subscription`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id }),

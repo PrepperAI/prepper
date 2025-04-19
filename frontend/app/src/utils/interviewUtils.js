@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./utils/api";
+
 // utils/interviewUtils.js
 export const fetchInterviewResponse = async ({ message, config }) => {
-  const response = await fetch("http://127.0.0.1:8000/api/interview", {
+  const response = await fetch(`${API_BASE_URL}/api/interview`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

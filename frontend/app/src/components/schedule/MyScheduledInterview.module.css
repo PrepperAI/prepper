@@ -1,18 +1,155 @@
-/* Cool interview table styling */
+/* Responsive styles for date/time inputs */
+@media (min-width: 768px) {
+  .dateTimeContainer {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+} /* Date Picker Styling */
+.datePicker {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: 0.5rem;
+  background-color: #23233a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.datePicker:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+
+/* Override react-datepicker styles to match theme */
+.datePickerPopper {
+  z-index: 1100 !important; /* Higher than the modal backdrop */
+}
+
+:global(.react-datepicker) {
+  background-color: #1f1f2e !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  border-radius: 0.5rem !important;
+  color: #f1f5f9 !important;
+  font-family: inherit !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  font-size: 0.9rem !important;
+}
+
+:global(.react-datepicker-popper) {
+  width: auto !important;
+}
+
+:global(.react-datepicker__triangle) {
+  display: none !important;
+}
+
+:global(.react-datepicker__header) {
+  background-color: #23233a !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-top-left-radius: 0.5rem !important;
+  border-top-right-radius: 0.5rem !important;
+  padding-top: 10px !important;
+}
+
+:global(.react-datepicker__current-month),
+:global(.react-datepicker__day-name) {
+  color: #f1f5f9 !important;
+}
+
+:global(.react-datepicker__day) {
+  color: #cbd5e1 !important;
+  border-radius: 0.25rem !important;
+  transition: all 0.2s !important;
+}
+
+:global(.react-datepicker__day:hover) {
+  background-color: rgba(139, 92, 246, 0.2) !important;
+  color: white !important;
+}
+
+:global(.react-datepicker__day--selected),
+:global(.react-datepicker__day--keyboard-selected) {
+  background-color: #8b5cf6 !important;
+  color: white !important;
+}
+
+:global(.react-datepicker__time-container) {
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  width: 110px !important;
+}
+
+:global(.react-datepicker__time) {
+  background-color: #1f1f2e !important;
+  height: 250px !important;
+}
+
+:global(.react-datepicker__time-container .react-datepicker__time-box) {
+  width: 100% !important;
+  overflow-y: auto !important;
+  height: 250px !important;
+}
+
+:global(.react-datepicker__time-list) {
+  background-color: #1f1f2e !important;
+  height: 250px !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+:global(.react-datepicker__time-list-item) {
+  color: #cbd5e1 !important;
+  transition: all 0.2s !important;
+  padding: 8px 10px !important;
+  height: auto !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+:global(.react-datepicker__time-list-item:hover) {
+  background-color: rgba(139, 92, 246, 0.2) !important;
+  color: white !important;
+}
+
+:global(.react-datepicker__time-list-item--selected) {
+  background-color: #8b5cf6 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+:global(.react-datepicker__navigation) {
+  top: 12px !important;
+}
+
+:global(.react-datepicker__navigation-icon::before) {
+  border-color: #a78bfa !important;
+  border-width: 2px 2px 0 0 !important;
+}
+
+:global(
+    .react-datepicker__navigation:hover
+      .react-datepicker__navigation-icon::before
+  ) {
+  border-color: #8b5cf6 !important;
+} /* === Base Container === */
 .scheduleContainer {
   background-color: #1f1f2e;
   padding: 2rem;
   border-radius: 1rem;
   max-width: 1100px;
   margin: 0 auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   color: #f1f5f9;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
 }
 
+/* === Section Header === */
 .scheduleContainer h2 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #f1f5f9;
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
@@ -21,14 +158,11 @@
   padding-bottom: 1rem;
 }
 
+/* === Table === */
 .scheduleTable {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 0.75rem;
-}
-
-.scheduleTable thead {
-  border-bottom: none;
 }
 
 .scheduleTable th {
@@ -37,18 +171,7 @@
   color: #94a3b8;
   font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-.scheduleTable tbody tr {
-  transition: transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.scheduleTable tbody tr:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .scheduleTable td {
@@ -61,7 +184,6 @@
 .scheduleTable td:first-child {
   border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
-  position: relative;
 }
 
 .scheduleTable td:first-child::before {
@@ -72,17 +194,15 @@
   height: 100%;
   width: 4px;
   background: linear-gradient(to bottom, #8b5cf6, #6366f1);
-  border-top-left-radius: 0.75rem;
-  border-bottom-left-radius: 0.75rem;
+  border-radius: 0.75rem 0 0 0.75rem;
 }
 
 .scheduleTable td:last-child {
-  border-top-right-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
+  border-radius: 0 0.75rem 0.75rem 0;
   text-align: right;
 }
 
-.scheduleTable button {
+.iconButton {
   background-color: rgba(255, 255, 255, 0.05);
   color: #cbd5e1;
   border: none;
@@ -90,88 +210,40 @@
   border-radius: 0.375rem;
   cursor: pointer;
   margin: 0 0.5rem;
-  transition: all 0.2s ease;
   width: 2rem;
   height: 2rem;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
 }
 
-.scheduleTable button:hover {
+.iconButton:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #f1f5f9;
 }
 
-.scheduleTable button:first-child:hover {
-  background-color: rgba(99, 102, 241, 0.2);
-  color: #8b5cf6;
+.iconButton:first-child:hover {
+  background-color: rgba(139, 92, 246, 0.15);
 }
 
-.scheduleTable button:last-child:hover {
+.iconButton:last-child:hover {
   background-color: rgba(239, 68, 68, 0.2);
   color: #ef4444;
 }
 
-.loadingState {
-  text-align: center;
-  padding: 3rem;
-  color: #94a3b8;
-  font-size: 1.1rem;
-}
-
-.loadingState::after {
-  content: "...";
-  animation: dots 1.5s infinite;
-}
-
-@keyframes dots {
-  0%,
-  20% {
-    content: ".";
-  }
-  40% {
-    content: "..";
-  }
-  60%,
-  100% {
-    content: "...";
-  }
-}
-
-.emptyState {
-  text-align: center;
-  padding: 3rem;
-  color: #94a3b8;
-  background-color: #1e293b;
-  border-radius: 0.75rem;
-  margin-top: 1rem;
-  border: 1px dashed rgba(203, 213, 225, 0.2);
-}
-
+/* === Modal === */
 .rescheduleModal {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 999;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-}
-
-.modalContent {
-  position: relative;
-  padding: 2rem;
-  background: #1f1f2e;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 1rem;
-  color: #f1f5f9;
-  max-width: 450px;
-  width: 90%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .rescheduleModal::before {
@@ -186,30 +258,173 @@
   z-index: -1;
 }
 
-.modalContent h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+.modalContent {
+  background-color: #1f1f2e;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   color: #f1f5f9;
-  font-weight: 600;
+  max-height: 80vh;
+  margin: auto;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  backdrop-filter: blur(8px);
 }
 
-/* DatePicker styling */
+.modalTitle {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Date Picker Container */
+.datePickerContainer {
+  margin: 1.5rem 0;
+}
+
+.datePickerLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.datePickerInputWrapper {
+  position: relative;
+}
+
+.calendarIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8b5cf6;
+  z-index: 1;
+}
+
+/* Date Picker Styling */
 .datePicker {
   width: 100%;
-  padding: 0.875rem;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
   border-radius: 0.5rem;
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  background-color: rgba(15, 23, 42, 0.8);
+  background-color: #23233a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #f1f5f9;
   font-size: 1rem;
-  margin-bottom: 1.5rem;
+  cursor: pointer;
 }
 
 .datePicker:focus {
   outline: none;
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+
+/* Make sure the DatePicker wrapper has position relative */
+:global(.react-datepicker-wrapper),
+:global(.react-datepicker__input-container) {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+/* Override react-datepicker styles to make it a popup - these must use :global */
+:global(.react-datepicker-popper) {
+  z-index: 1000;
+}
+
+:global(.react-datepicker) {
+  background-color: #1f1f2e;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 0.5rem;
+  color: #f1f5f9;
+  font-family: inherit;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+:global(.react-datepicker__triangle) {
+  display: none;
+}
+
+:global(.react-datepicker__header) {
+  background-color: #23233a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding-top: 10px;
+}
+
+:global(.react-datepicker__current-month),
+:global(.react-datepicker__day-name) {
+  color: #f1f5f9;
+}
+
+:global(.react-datepicker__day) {
+  color: #cbd5e1;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+:global(.react-datepicker__day:hover) {
+  background-color: rgba(139, 92, 246, 0.2);
+  color: white;
+}
+
+:global(.react-datepicker__day--selected),
+:global(.react-datepicker__day--keyboard-selected) {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+:global(.react-datepicker__time-container),
+:global(.react-datepicker__time) {
+  background-color: #1f1f2e;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global(.react-datepicker__time-container .react-datepicker__time-box) {
+  width: 100%;
+  overflow-y: auto;
+}
+
+:global(.react-datepicker__time-list) {
+  background-color: #1f1f2e;
+}
+
+:global(.react-datepicker__time-list-item) {
+  color: #cbd5e1;
+  transition: all 0.2s;
+  padding: 8px 10px !important;
+  height: auto !important;
+}
+
+:global(.react-datepicker__time-list-item:hover) {
+  background-color: rgba(139, 92, 246, 0.2) !important;
+  color: white !important;
+}
+
+:global(.react-datepicker__time-list-item--selected) {
+  background-color: #8b5cf6 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+:global(.react-datepicker__navigation) {
+  top: 12px;
+}
+
+:global(.react-datepicker__navigation-icon::before) {
+  border-color: #a78bfa;
+  border-width: 2px 2px 0 0;
+}
+
+:global(
+    .react-datepicker__navigation:hover
+      .react-datepicker__navigation-icon::before
+  ) {
   border-color: #8b5cf6;
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
 .modalActions {
@@ -220,13 +435,13 @@
 }
 
 .modalActions button {
-  border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.95rem;
+  border: none;
 }
 
 .modalActions button:first-child {
@@ -248,10 +463,10 @@
   transform: translateY(-1px);
 }
 
-.modalActions button:last-child:disabled {
-  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+.modalActions button:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
-  opacity: 0.7;
+  transform: none;
 }
 
 .closeBtn {
@@ -263,4 +478,222 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+
+/* === Loading and Empty States === */
+.loadingState,
+.emptyState {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: #94a3b8;
+}
+
+:global(.react-datepicker__navigation) {
+  width: 50px;
+  height: 32px;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+  cursor: pointer;
+  z-index: 2;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* :global(.react-datepicker__navigation > span) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -10%);
+  margin-bottom: 50%;
+} */
+
+/* Additional responsive utilities */
+@media (max-width: 1024px) {
+  .scheduleTable {
+    font-size: 0.9rem;
+  }
+
+  .scheduleTable th,
+  .scheduleTable td {
+    padding: 1rem;
+  }
+}
+
+/* Tablet responsiveness */
+@media (max-width: 900px) {
+  .scheduleContainer {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .scheduleTable th,
+  .scheduleTable td {
+    padding: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .iconButton {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.25rem;
+  }
+
+  .modalContent {
+    padding: 1.5rem;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .scheduleContainer {
+    padding: 1.5rem 1rem;
+  }
+
+  .scheduleTable thead {
+    display: none;
+  }
+
+  .scheduleTable,
+  .scheduleTable tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .scheduleTable tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: #23233a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+
+  .scheduleTable tr::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #8b5cf6, #6366f1);
+    border-radius: 0.75rem 0 0 0.75rem;
+  }
+
+  .scheduleTable td {
+    display: block;
+    text-align: right;
+    padding: 0.75rem 1rem 0.75rem 8rem; /* Add space for label */
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: transparent;
+    border-radius: 0;
+    min-height: 2.5rem;
+    font-size: 0.85rem;
+  }
+
+  .scheduleTable td:first-child {
+    border-radius: 0;
+  }
+
+  .scheduleTable td:first-child::before {
+    display: none; /* Remove the left border since we moved it to the tr */
+  }
+
+  .scheduleTable td:last-child {
+    border-bottom: none;
+    text-align: right;
+    border-radius: 0;
+    padding-top: 0.75rem;
+  }
+
+  .scheduleTable td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    text-align: left;
+    width: 6.5rem;
+  }
+
+  .iconButton {
+    margin: 0 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    width: auto;
+    height: auto;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  /* Add text labels to buttons for better UX */
+  .iconButton:first-child svg {
+    margin-right: 0.25rem;
+  }
+
+  .iconButton:first-child::after {
+    content: "Edit";
+  }
+
+  .iconButton:last-child svg {
+    margin-right: 0.25rem;
+  }
+
+  .iconButton:last-child::after {
+    content: "Cancel";
+  }
+
+  .modalContent {
+    width: 95%;
+    padding: 1.25rem;
+  }
+
+  .datePicker {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.85rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .scheduleContainer {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .scheduleTable td {
+    padding: 0.65rem 0.75rem 0.65rem 7.5rem;
+    font-size: 0.8rem;
+  }
+
+  .scheduleTable td::before {
+    font-size: 0.7rem;
+    width: 6rem;
+  }
+
+  .modalActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .modalActions button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+  }
+}
+
+.dateInput {
+  z-index: 999;
 }

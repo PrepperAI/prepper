@@ -1,4 +1,5 @@
 import { endBefore } from "firebase/firestore";
+import { API_BASE_URL } from "./api";
 
 export const generateFeedback = async ({
   interview_type,
@@ -10,7 +11,7 @@ export const generateFeedback = async ({
   endpointCompletion,
 }) => {
   try {
-    const endpoint = `http://localhost:8000/api/feedback/${endpointCompletion}`;
+    const endpoint = `${API_BASE_URL}/api/feedback/${endpointCompletion}`;
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

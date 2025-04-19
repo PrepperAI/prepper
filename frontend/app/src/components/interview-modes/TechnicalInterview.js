@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import BlockedModal from "../BlockedModal";
 import HeyGenAvatarStreamer from "../HeyGenAvatarStreamer";
 import { generateFeedback } from "../../utils/getFeedback";
+import { API_BASE_URL } from "../../utils/api";
 
 // Loading overlay component
 const LoadingOverlay = ({
@@ -168,7 +169,7 @@ const TechnicalInterview = ({ config }) => {
         ]);
 
         const response = await fetch(
-          "http://localhost:8000/api/interview/technical/init",
+          `${API_BASE_URL}/api/interview/technical/init`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -252,28 +253,25 @@ const TechnicalInterview = ({ config }) => {
         { role: "user", content: spokenTranscript },
       ]);
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/interview/technical",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId.current,
-            code: codeSnapshot.code,
-            language: codeSnapshot.lang,
-            spoken_response: spokenTranscript,
-            interview_type: config?.interview_type || "technical coding",
-            job_role: config?.role || "Backend Software Engineer",
-            candidate_level: config?.experience_level || "entry",
-            company: config?.company || "",
-            difficulty: config?.difficulty || "Medium",
-            focus_area: config?.focus_area || "",
-            resume: resumeText || "No resume provided.",
-            user_id: user?.uid || null,
-            user_email: user?.email || null,
-          }),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/api/interview/technical`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionId.current,
+          code: codeSnapshot.code,
+          language: codeSnapshot.lang,
+          spoken_response: spokenTranscript,
+          interview_type: config?.interview_type || "technical coding",
+          job_role: config?.role || "Backend Software Engineer",
+          candidate_level: config?.experience_level || "entry",
+          company: config?.company || "",
+          difficulty: config?.difficulty || "Medium",
+          focus_area: config?.focus_area || "",
+          resume: resumeText || "No resume provided.",
+          user_id: user?.uid || null,
+          user_email: user?.email || null,
+        }),
+      });
 
       if (!response.ok) throw new Error("Interview API request failed");
       const data = await response.json();
@@ -357,7 +355,7 @@ const TechnicalInterview = ({ config }) => {
       "The interview is ending. Please thank the candidate, encourage them, and say goodbye politely.";
 
     try {
-      const response = await fetch("http://localhost:8000/api/interview", {
+      const response = await fetch(`${API_BASE_URL}/api/interview`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

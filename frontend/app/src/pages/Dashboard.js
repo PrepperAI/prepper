@@ -138,17 +138,21 @@ const Dashboard = () => {
             />
           ) : (
             <div className={styles.avatarPlaceholder}>
-              {user?.name?.charAt(0)}
+              {(user?.name && user.name.charAt(0).toUpperCase()) || "?"}
             </div>
           )}
-          <p className={styles.userName}>{user?.name}</p>
+
+          <p className={styles.userName}>{user?.name || "Guest"}</p>
+
           <p className={styles.planType}>
             {user?.isPremium ? (
               <>
                 <Gem size={14} style={{ marginRight: 4 }} /> Premium Plan
               </>
             ) : (
-              "🆓 Free Plan"
+              <>
+                <Gem size={14} style={{ marginRight: 4 }} /> Free Plan
+              </>
             )}
           </p>
 

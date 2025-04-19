@@ -37,3 +37,6 @@ export const speakText = async (text, sessionId, streamId) => {
     body: JSON.stringify({ text, session_id: sessionId, stream_id: streamId }),
   });
 };
+
+// src/utils/api.js
+export const API_BASE_URL = process.env.REACT_APP_API_URL;

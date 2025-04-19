@@ -86,12 +86,12 @@ const FeedbackList = () => {
           <tbody>
             {feedbacks.map((fb, index) => (
               <tr key={index}>
-                <td>{fb.type}</td>
-                <td>{fb.role}</td>
-                <td>{fb.level}</td>
-                <td>{fb.date}</td>
-                <td>{fb.format}</td>
-                <td>
+                <td data-label="Type">{fb.type}</td>
+                <td data-label="Role">{fb.role}</td>
+                <td data-label="Level">{fb.level}</td>
+                <td data-label="Date">{fb.date}</td>
+                <td data-label="Format">{fb.format}</td>
+                <td data-label="Action">
                   <button
                     className={styles.iconButton}
                     title="View"
@@ -149,7 +149,16 @@ const FeedbackList = () => {
                 </ul>
               </>
             ) : (
-              <pre style={{ whiteSpace: "pre-wrap", color: "#f1f5f9" }}>
+              <pre
+                style={{
+                  whiteSpace: "pre-wrap",
+                  color: "#f1f5f9",
+                  maxWidth: "100%",
+                  overflowX: "auto",
+                  fontSize: "0.9rem",
+                  lineHeight: "1.5",
+                }}
+              >
                 {selectedFeedback.markdown}
               </pre>
             )}
