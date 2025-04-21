@@ -78,13 +78,13 @@ const Header = () => {
           <a href="#features" onClick={closeMenu}>
             Features
           </a>
-          <a href="pricing" onClick={closeMenu}>
+          <a href="#pricing" onClick={closeMenu}>
             Pricing
           </a>
-          <a href="schedule" onClick={closeMenu}>
+          <a href="#schedule" onClick={closeMenu}>
             Schedule
           </a>
-          <a href="testimonials" onClick={closeMenu}>
+          <a href="#testimonials" onClick={closeMenu}>
             Testimonials
           </a>
           <button
