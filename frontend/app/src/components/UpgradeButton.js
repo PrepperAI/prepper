@@ -3,9 +3,7 @@ import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useUser } from "../context/UserContext";
 import styles from "../pages/Dashboard.module.css";
-const stripePromise = loadStripe(
-  "pk_test_51R9glcP8WyNdyVye9ksUKQcOUtdbxZdlqwJEXma0PvWAPh5he6JYKPpotzcOB4ZTeoBpIjkKqFKaEIfLyNq3jDyT00kVJMNBZs"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const UpgradeButton = () => {
   const { user } = useUser();
