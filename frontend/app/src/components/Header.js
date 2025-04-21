@@ -75,10 +75,11 @@ const Header = () => {
   };
 
   const scrollToSection = (id) => {
+    // Always close the menu first
+    closeMenu();
+
     const element = document.getElementById(id);
     if (element) {
-      closeMenu();
-
       // If we're not on the homepage, navigate there first
       if (location.pathname !== "/") {
         navigate("/");

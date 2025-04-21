@@ -13,8 +13,10 @@ import "./LandingPage.css";
 const LandingPage = () => {
   return (
     <>
-      <Header />
-      <Hero />
+      <div>
+        <Header className="header" />
+        <Hero />
+      </div>
       <div id="features">
         <Features />
       </div>

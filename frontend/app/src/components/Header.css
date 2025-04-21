@@ -113,14 +113,17 @@
     transform: translateX(0);
   }
 
-  .nav-links a,
+  .nav-links a {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.75rem 0;
+    display: block; /* Make links block-level for better tap target */
+  }
+
   .get-started {
     width: 100%;
     font-size: 1.2rem;
     padding: 0.75rem 0;
-  }
-
-  .get-started {
     text-align: center;
     margin-top: 1rem;
   }
