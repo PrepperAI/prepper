@@ -33,9 +33,9 @@ export const UserProvider = ({ children }) => {
             planType: "free",
             createdAt: new Date().toISOString(),
             remainingAttempts: {
-              behavioral: 5,
-              technical: 3,
-              systemDesign: 2,
+              behavioral: 3,
+              technical: 1,
+              systemDesign: 1,
             },
             last_reset_at: new Date().toISOString(), // 👈 ADD THIS LINE HERE
           });
@@ -50,9 +50,9 @@ export const UserProvider = ({ children }) => {
           ) {
             await updateDoc(userRef, {
               remainingAttempts: {
-                behavioral: 5,
-                technical: 3,
-                systemDesign: 2,
+                behavioral: 3,
+                technical: 1,
+                systemDesign: 1,
               },
             });
             console.log("🛠️ Added remainingAttempts to existing free user.");
