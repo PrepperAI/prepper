@@ -42,19 +42,19 @@ import json
 router = APIRouter()
 
 # 🔐 Load GCS credentials
-if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
-    creds_dict = json.loads(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+if os.getenv("FIREBASE_CREDENTIALS_JSON"):
+    creds_dict = json.loads(os.getenv("FIREBASE_CREDENTIALS_JSON"))
     credentials = service_account.Credentials.from_service_account_info(creds_dict)
 else:
     credentials = service_account.Credentials.from_service_account_file(
-        os.getenv("FIREBASE_CREDENTIALS_JSON")
+        os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
     )
 
 # ✅ Initialize GCS client
 storage_client = storage.Client(credentials=credentials)
 
 # ✅ GCS bucket name (from Firebase Storage URL)
-BUCKET_NAME = "course-craze.appspot.com"
+BUCKET_NAME ="course-craze.firebasestorage.app"
 
 @router.post("/upload-resume")
 async def upload_resume(file: UploadFile = File(...), request: Request = None):
