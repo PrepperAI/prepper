@@ -13,26 +13,33 @@ import "./LandingPage.css";
 const LandingPage = () => {
   return (
     <>
-      <div>
-        <Header className="header" />
+      <Header /> {/* Fixed position */}
+      {/* Content starts below the header */}
+      <div className="page-content">
         <Hero />
+
+        <div id="features">
+          <Features />
+        </div>
+
+        {/* <div id="tools">
+          <ToolsGrid />
+        </div> */}
+
+        <div id="pricing">
+          <Pricing />
+        </div>
+
+        <div id="schedule">
+          <ScheduleSection />
+        </div>
+
+        <div id="testimonials">
+          <Testimonials />
+        </div>
+
+        <Footer />
       </div>
-      <div id="features">
-        <Features />
-      </div>
-      {/* <div id="tools">
-        <ToolsGrid />
-      </div> */}
-      <div id="pricing">
-        <Pricing />
-      </div>
-      <div id="schedule">
-        <ScheduleSection />
-      </div>
-      <div id="testimonials">
-        <Testimonials />
-      </div>
-      <Footer />
     </>
   );
 };
