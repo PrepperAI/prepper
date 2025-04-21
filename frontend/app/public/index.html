@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- Include both SVG and ICO favicons for maximum compatibility -->
     <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -10,7 +12,7 @@
       content="Prepper is your AI-powered platform for mock interviews, resume reviews, and real-time feedback."
     />
 
-    <!-- ✅ Open Graph Meta Tags for WhatsApp, LinkedIn, Discord, Facebook -->
+    <!-- ✅ Open Graph Meta Tags for WhatsApp, LinkedIn, Discord, Facebook, Instagram -->
     <meta property="og:title" content="Prepper — Ace Interviews with AI" />
     <meta
       property="og:description"
@@ -22,8 +24,45 @@
     />
     <meta property="og:url" content="https://prepper-frontend.onrender.com" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Prepper" />
 
-    <!-- Apple icon -->
+    <!-- WhatsApp specific (uses Open Graph but benefits from these extras) -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Facebook specific -->
+    <meta property="fb:app_id" content="your_facebook_app_id" />
+
+    <!-- Instagram and Mobile Messaging Preview -->
+    <meta
+      property="al:ios:url"
+      content="https://prepper-frontend.onrender.com"
+    />
+    <meta property="al:ios:app_name" content="Prepper" />
+    <meta
+      property="al:android:url"
+      content="https://prepper-frontend.onrender.com"
+    />
+    <meta property="al:android:app_name" content="Prepper" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Prepper — Ace Interviews with AI" />
+    <meta
+      name="twitter:description"
+      content="Prepper is your AI-powered platform for mock interviews, resume reviews, and real-time feedback."
+    />
+    <meta
+      name="twitter:image"
+      content="https://prepper-frontend.onrender.com/preview.png"
+    />
+
+    <!-- Apple icon - better to use PNG format with absolute URL -->
+    <link
+      rel="apple-touch-icon"
+      href="https://prepper-frontend.onrender.com/apple-touch-icon.png"
+    />
+    <!-- Fallback to SVG if you don't have the PNG version yet -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
 
     <!-- Manifest -->
@@ -41,7 +80,6 @@
       and real-time feedback.
     </title>
   </head>
-
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
