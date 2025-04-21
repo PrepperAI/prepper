@@ -8,6 +8,7 @@ import Pricing from "../components/Pricing";
 import ScheduleSection from "../components/ScheduleSection";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
+import "./LandingPage.css";
 
 const LandingPage = () => {
   return (
