@@ -1,4 +1,4 @@
-/* Base styles */
+/* Base styles (keep these) */
 .main-header {
   display: flex;
   justify-content: space-between;
@@ -6,13 +6,9 @@
   padding: 1.2rem 1.5rem;
   background-color: #0a0a0a;
   border-bottom: 1px solid #222;
-  position: fixed; /* Changed from sticky to fixed */
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -38,7 +34,6 @@
   color: #ccc;
   font-weight: 500;
   transition: color 0.3s ease;
-  cursor: pointer;
 }
 
 .nav-links a:hover {
@@ -58,11 +53,6 @@
 
 .get-started:hover {
   background: linear-gradient(135deg, #5b21b6, #8b5cf6);
-}
-
-.get-started:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
 }
 
 .nav-toggle {
@@ -88,17 +78,12 @@
   display: block;
 }
 
-/* Add space to top of content to account for fixed header */
-body {
-  padding-top: 80px; /* Should match header height */
-}
-
-/* Adjust section scroll points */
+/* Add this to your global CSS or to each section component as needed */
 #features,
 #pricing,
 #schedule,
 #testimonials {
-  scroll-margin-top: 80px; /* Ensures sections don't get hidden under the header */
+  scroll-margin-top: 80px; /* Adjust this to match your header height */
 }
 
 @media screen and (max-width: 768px) {
@@ -138,6 +123,5 @@ body {
   .get-started {
     text-align: center;
     margin-top: 1rem;
-    padding: 0.75rem;
   }
 }
