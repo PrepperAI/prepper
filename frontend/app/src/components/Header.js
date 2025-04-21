@@ -32,18 +32,16 @@ const Header = () => {
   }, [menuOpen]);
 
   useEffect(() => {
-    // Check if there's a hash in the URL when the component mounts or location changes
     if (location.hash) {
       const id = location.hash.replace("#", "");
       const element = document.getElementById(id);
       if (element) {
-        // Wait a bit for the page to fully load before scrolling
         setTimeout(() => {
-          const yOffset = -80; // Adjust based on header height
+          const yOffset = -80;
           const y =
             element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: "smooth" });
-        }, 100);
+        }, 300);
       }
     }
   }, [location]);
@@ -75,24 +73,14 @@ const Header = () => {
   };
 
   const scrollToSection = (id) => {
-    // Always close the menu first
     closeMenu();
 
-    const element = document.getElementById(id);
-    if (element) {
-      // If we're not on the homepage, navigate there first
-      if (location.pathname !== "/") {
-        navigate("/");
-        // We'll need to wait for the navigation to complete before scrolling
-        setTimeout(() => {
-          const yOffset = -80; // Adjust based on header height
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }, 100);
-      } else {
-        // We're already on the homepage, just scroll
-        const yOffset = -80; // Adjust based on header height
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        const yOffset = -80;
         const y =
           element.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({ top: y, behavior: "smooth" });
