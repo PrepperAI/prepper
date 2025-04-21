@@ -4,14 +4,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-
-  /* Gradient background like your form */
   background: linear-gradient(to bottom right, #1e1e2e, #13131b);
-
-  /* Optional glow overlay on top */
   background-blend-mode: overlay;
   backdrop-filter: blur(4px);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,16 +17,25 @@
   background-color: #1c1c2b;
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.25); /* Purple glow */
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
   text-align: center;
   max-width: 600px;
   width: 90%;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .modal h2 {
   color: #f87171;
-  margin-bottom: 16px;
   font-size: 24px;
+  margin: 0;
 }
 
 .modal p {
@@ -44,37 +48,43 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  margin-top: 24px;
 }
 
-.coach {
-  background-color: #8b5cf6;
-  color: white;
+.actions button,
+.actions .upgrade-button {
+  /* assuming UpgradeButton renders this class */
+  flex: 1;
+  min-width: 48%;
   padding: 12px 20px;
-  border: none;
   border-radius: 8px;
   font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.coach:hover {
-  background-color: #7c3aed;
+.backBtn {
+  background-color: #374151;
+  color: white;
+  border: none;
 }
 
-.close {
+.backBtn:hover {
+  background-color: #4b5563;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
   background: none;
   color: #ccc;
   border: none;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 8px;
+  padding: 4px;
 }
 
-.close:hover {
+.closeIcon:hover {
   color: white;
-}
-
-button {
-  min-width: 180px;
 }

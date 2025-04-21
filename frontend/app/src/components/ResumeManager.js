@@ -110,8 +110,7 @@ const ResumeManager = () => {
         }}
       >
         <label htmlFor="resume-upload" className={styles.uploadLabel}>
-          <Upload size={16} style={{ marginRight: "4px" }} />
-          Upload Resume
+          <Upload size={16} /> <span>Upload Resume</span>
         </label>
         <input
           id="resume-upload"
@@ -163,10 +162,12 @@ const ResumeManager = () => {
             </div>
             <div className={styles.actions}>
               <button onClick={() => makeDefault(resume.id)}>
-                <Star size={14} /> Set as Default
+                <Star size={14} />{" "}
+                <span className={styles.buttonText}>Set as Default</span>
               </button>
               <button onClick={() => handleDelete(resume)}>
-                <Trash2 size={14} /> Delete
+                <Trash2 size={14} />{" "}
+                <span className={styles.buttonText}>Delete</span>
               </button>
             </div>
           </li>

@@ -1,7 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./BehavioralInterview.module.css";
 
-const TranscriptView = ({ conversationLog, aiSpeaking }) => {
+const TranscriptView = ({
+  conversationLog,
+  aiSpeaking,
+  waitingForCompletion,
+}) => {
   const scrollRef = useRef(null);
   const [lastMsgIndex, setLastMsgIndex] = useState(-1);
 
@@ -112,8 +116,12 @@ const TranscriptView = ({ conversationLog, aiSpeaking }) => {
         )}
       </div>
 
-      {aiSpeaking && (
-        <div className={styles.aiSpeakingIndicator}>AI is speaking</div>
+      {(aiSpeaking || waitingForCompletion) && (
+        <div className={styles.aiSpeakingIndicator}>
+          {aiSpeaking
+            ? "AI is speaking"
+            : "Waiting for you to complete your sentence…"}
+        </div>
       )}
     </div>
   );

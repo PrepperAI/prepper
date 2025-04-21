@@ -18,6 +18,8 @@ import {
   LogOut,
   XCircle,
   Gem,
+  Menu,
+  X,
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -26,7 +28,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef();
+  const sidebarRef = useRef();
 
   const isActive = (path) => (location.pathname === path ? styles.active : "");
 
@@ -55,72 +59,113 @@ const Dashboard = () => {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setShowMenu(false);
       }
+
+      if (
+        window.innerWidth <= 768 &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(e.target) &&
+        isMobileMenuOpen
+      ) {
+        setIsMobileMenuOpen(false);
+      }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   return (
     <div className={styles.dashboardPage}>
-      <aside className={styles.sidebar}>
+      <button
+        className={styles.mobileMenuToggle}
+        onClick={toggleMobileMenu}
+        aria-label="Toggle menu"
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      <aside
+        ref={sidebarRef}
+        className={`${styles.sidebar} ${
+          isMobileMenuOpen ? styles.sidebarOpen : ""
+        }`}
+      >
         <Link className={styles.logo} to="/">
-          Prep<span>per</span>
+          <div className={styles.logoText}>
+            Prep<span>per</span>
+          </div>
+          <div className={styles.logoIcon}>
+            P<span>p</span>
+          </div>
         </Link>
 
         <nav className={styles.navLinks}>
           <Link to="/dashboard/home" className={isActive("/dashboard/home")}>
-            <Home size={18} style={{ marginRight: 8 }} /> Dashboard
+            <Home size={18} />{" "}
+            <span className={styles.linkText}>Dashboard</span>
           </Link>
           <Link
             to="/dashboard/behavioral"
             className={isActive("/dashboard/behavioral")}
           >
-            <Mic size={18} style={{ marginRight: 8 }} /> Behavioral Interview
+            <Mic size={18} />{" "}
+            <span className={styles.linkText}>Behavioral Interview</span>
           </Link>
           <Link
             to="/dashboard/technical"
             className={isActive("/dashboard/technical")}
           >
-            <Code size={18} style={{ marginRight: 8 }} /> Technical Coding
+            <Code size={18} />{" "}
+            <span className={styles.linkText}>Technical Coding</span>
           </Link>
           <Link
             to="/dashboard/system-design"
             className={isActive("/dashboard/system-design")}
           >
-            <BrainCircuit size={18} style={{ marginRight: 8 }} /> System Design
+            <BrainCircuit size={18} />{" "}
+            <span className={styles.linkText}>System Design</span>
           </Link>
           <Link
             to="/dashboard/schedule"
             className={isActive("/dashboard/schedule")}
           >
-            <CalendarClock size={18} style={{ marginRight: 8 }} /> Schedule
-            Interview
+            <CalendarClock size={18} />{" "}
+            <span className={styles.linkText}>Schedule Interview</span>
           </Link>
           <Link
             to="/dashboard/my-interviews"
             className={isActive("/dashboard/my-interviews")}
           >
-            <Folder size={18} style={{ marginRight: 8 }} /> My Interviews
+            <Folder size={18} />{" "}
+            <span className={styles.linkText}>My Interviews</span>
           </Link>
           <Link
             to="/dashboard/feedback"
             className={isActive("/dashboard/feedback")}
           >
-            <MessageSquareText size={18} style={{ marginRight: 8 }} /> Feedback
+            <MessageSquareText size={18} />{" "}
+            <span className={styles.linkText}>Feedback</span>
           </Link>
         </nav>
 
         {!user?.isPremium && (
           <div className={styles.upgradeCard}>
             <h4>
-              <Gem size={16} style={{ marginRight: 6 }} /> Upgrade to Premium
+              <Gem size={16} />{" "}
+              <span className={styles.upgradeText}>Upgrade to Premium</span>
             </h4>
-            <p>Unlock all features and access.</p>
+            <p className={styles.upgradeDesc}>
+              Unlock all features and access.
+            </p>
             <UpgradeButton />
           </div>
         )}
@@ -142,27 +187,24 @@ const Dashboard = () => {
             </div>
           )}
 
-          <p className={styles.userName}>{user?.name || "Guest"}</p>
+          <div className={styles.userInfo}>
+            <p className={styles.userName}>{user?.name || "Guest"}</p>
 
-          <p className={styles.planType}>
-            {user?.isPremium ? (
-              <>
-                <Gem size={14} style={{ marginRight: 4 }} /> Premium Plan
-              </>
-            ) : (
-              <>
-                <Gem size={14} style={{ marginRight: 4 }} /> Free Plan
-              </>
-            )}
-          </p>
+            <p className={styles.planType}>
+              <Gem size={14} />{" "}
+              <span className={styles.planText}>
+                {user?.isPremium ? "Premium Plan" : "Free Plan"}
+              </span>
+            </p>
+          </div>
 
           {showMenu && (
             <div className={styles.userMenu}>
               <button onClick={handleSignOut}>
-                <LogOut size={16} style={{ marginRight: 6 }} /> Sign Out
+                <LogOut size={16} /> <span>Sign Out</span>
               </button>
               <button onClick={() => setShowCancelModal(true)}>
-                <XCircle size={16} style={{ marginRight: 6 }} /> Cancel Plan
+                <XCircle size={16} /> <span>Cancel Plan</span>
               </button>
             </div>
           )}

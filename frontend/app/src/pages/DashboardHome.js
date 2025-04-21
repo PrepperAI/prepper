@@ -16,6 +16,7 @@ import {
   Brain,
   CalendarClock,
   HandMetal,
+  Hourglass,
 } from "lucide-react";
 
 const DashboardHome = () => {
@@ -145,19 +146,34 @@ const DashboardHome = () => {
 
       {!user?.isPremium && (
         <div className={styles.remainingAttempts}>
-          <h2>⏳ Remaining Practice Attempts</h2>
-          <ul>
+          <h2>
+            <Hourglass
+              size={18}
+              style={{ marginRight: "6px", verticalAlign: "middle" }}
+            />
+            Remaining Practice Attempts
+          </h2>
+          <ul className={styles.attemptList}>
             <li>
-              <Mic size={14} /> Behavioral:{" "}
-              {user?.remainingAttempts?.behavioral ?? 0}
+              <Mic
+                size={14}
+                style={{ marginRight: "6px", verticalAlign: "middle" }}
+              />
+              Behavioral: {user?.remainingAttempts?.behavioral ?? 0}
             </li>
             <li>
-              <Code2 size={14} /> Technical:{" "}
-              {user?.remainingAttempts?.technical ?? 0}
+              <Code2
+                size={14}
+                style={{ marginRight: "6px", verticalAlign: "middle" }}
+              />
+              Technical: {user?.remainingAttempts?.technical ?? 0}
             </li>
             <li>
-              <Brain size={14} /> System Design:{" "}
-              {user?.remainingAttempts?.systemDesign ?? 0}
+              <Brain
+                size={14}
+                style={{ marginRight: "6px", verticalAlign: "middle" }}
+              />
+              System Design: {user?.remainingAttempts?.systemDesign ?? 0}
             </li>
           </ul>
         </div>

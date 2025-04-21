@@ -1,39 +1,40 @@
-// BlockedModal.js
 import React from "react";
 import styles from "./BlockedModal.module.css";
 import { useNavigate } from "react-router-dom";
-import UpgradeButton from "./UpgradeButton"; // Assuming you already built this
+import UpgradeButton from "./UpgradeButton";
+import { X, ShieldAlert } from "lucide-react";
 
 const BlockedModal = ({ onClose }) => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    navigate("/dashboard/home"); // ✅ Redirect to dashboard home
+    navigate("/dashboard/home");
     if (onClose) onClose();
   };
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2>🚫 You've run out of attempts</h2>
+        <button className={styles.closeIcon} onClick={handleClose}>
+          <X size={20} />
+        </button>
+
+        <div className={styles.header}>
+          <ShieldAlert size={28} />
+          <h2>You’ve run out of attempts</h2>
+        </div>
+
         <p>
-          Upgrade to Premium for unlimited practice interviews, or schedule a
-          real mock interview with a coach.
+          Upgrade to <strong>Premium</strong> for unlimited practice interviews
+          and personalized feedback.
         </p>
 
         <div className={styles.actions}>
-          <UpgradeButton />
-          <button
-            className={styles.coach}
-            onClick={() => navigate("/schedule")}
-          >
-            📅 Schedule a Coach
+          <button className={styles.backBtn} onClick={handleClose}>
+            Go Back
           </button>
+          <UpgradeButton />
         </div>
-
-        <button className={styles.close} onClick={handleClose}>
-          Close
-        </button>
       </div>
     </div>
   );

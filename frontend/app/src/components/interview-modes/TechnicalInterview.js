@@ -11,6 +11,7 @@ import BlockedModal from "../BlockedModal";
 import HeyGenAvatarStreamer from "../HeyGenAvatarStreamer";
 import { generateFeedback } from "../../utils/getFeedback";
 import { API_BASE_URL } from "../../utils/api";
+import StreamlinedAzureTranscriber from "../SystemDesign/TestTrans";
 
 // Loading overlay component
 const LoadingOverlay = ({
@@ -51,6 +52,7 @@ const TechnicalInterview = ({ config }) => {
   const liveTranscriberRef = useRef();
   const [permissionsGranted, setPermissionsGranted] = useState(null);
   const [loadingUserInfo, setLoadingUserInfo] = useState(true);
+  const [waitingForCompletion, setWaitingForCompletion] = useState(false);
 
   useEffect(() => {
     const getPermissions = async () => {
@@ -245,13 +247,12 @@ const TechnicalInterview = ({ config }) => {
 
   const handleFinalTranscript = async (spokenTranscript) => {
     if (!spokenTranscript || spokenTranscript.length < 2) return;
-
+    setConversationLog((prev) => [
+      ...prev,
+      { role: "user", content: spokenTranscript },
+    ]);
     try {
       // Add the user's message to the conversation immediately
-      setConversationLog((prev) => [
-        ...prev,
-        { role: "user", content: spokenTranscript },
-      ]);
 
       const response = await fetch(`${API_BASE_URL}/api/interview/technical`, {
         method: "POST",
@@ -505,30 +506,17 @@ const TechnicalInterview = ({ config }) => {
           <TranscriptView
             conversationLog={conversationLog}
             aiSpeaking={aiSpeaking}
+            waitingForCompletion={waitingForCompletion}
           />
-
-          <LiveTranscriber
-            ref={liveTranscriberRef}
-            aiSpeaking={aiSpeaking || !transcriptionActive}
+          <StreamlinedAzureTranscriber
+            aiSpeaking={aiSpeaking}
             onFinalTranscript={(newTranscript) => {
-              if (aiSpeaking || !transcriptionActive) return;
-
-              finalTranscriptBuffer.current += ` ${newTranscript}`.trim();
-
-              if (finalDebounceTimeout.current) {
-                clearTimeout(finalDebounceTimeout.current);
-              }
-
-              finalDebounceTimeout.current = setTimeout(() => {
-                if (
-                  finalTranscriptBuffer.current.trim().length > 0 &&
-                  !aiSpeaking &&
-                  transcriptionActive
-                ) {
-                  handleFinalTranscript(finalTranscriptBuffer.current.trim());
-                  finalTranscriptBuffer.current = "";
-                }
-              }, 0);
+              const cleaned = newTranscript.trim();
+              if (aiSpeaking) return;
+              handleFinalTranscript(cleaned);
+            }}
+            onWaitingChange={(isWaiting) => {
+              setWaitingForCompletion(isWaiting); // this is your state in parent
             }}
           />
 

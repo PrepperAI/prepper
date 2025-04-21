@@ -111,84 +111,6 @@ def extract_text_from_pdf_url(url: str) -> str:
         print("❌ Resume parsing error:", e)
         return "Resume not available."
 
-# @router.post("/interview/system-design/init")
-# async def init_system_design_interview(req: SystemDesignInitRequest):
-#     print("🧠 [System Design Init]", req.focus_system)
-
-#     user_ref = db.collection("users").document(req.user_id)
-#     user_doc = user_ref.get()
-#     if not user_doc.exists:
-#         raise HTTPException(status_code=404, detail="User not found in Firestore")
-
-#     user_data = user_doc.to_dict()
-#     if not user_data.get("isPremium", False):
-#         attempts = user_data.get("remainingAttempts", {}).get("systemDesign", 0)
-#         if attempts <= 0:
-#             raise HTTPException(status_code=403, detail="No remaining System Design attempts.")
-#         user_ref.update({"remainingAttempts.systemDesign": attempts - 1})
-#         print(f"🟠 System Design attempt decremented: {attempts - 1}")
-
-#     # ✅ Extract resume text
-#     parsed_resume = extract_text_from_pdf_url(req.resume)
-#     # ✅ Extract resume text
-
-#     print("📄 Parsed Resume Preview:\n", parsed_resume[:1000])  # Log first 1000 characters
-
-#     question_instruction = (
-#         f"Generate a system design question specifically about {req.focus_system}, suitable for a {req.candidate_level} level candidate."
-#         if req.focus_system else
-#         f"Generate a system design question of your choice that is suitable for a {req.candidate_level} level candidate, based on their background."
-#     )
-
-#     prompt = f"""
-#     You are playing the role of a real system design interviewer at {req.company or 'a top-tier company'}, not an assistant.
-#     Maintain a professional yet friendly tone — like a real human interviewer who wants to make the candidate comfortable and confident, even if they struggle. Be clear and kind in your follow-ups, like a supportive mentor.
-#     The candidate is applying for a {req.job_role} role at the {req.candidate_level} level.
-#     Their preferred location is {req.location or 'not specified'}.
-#     Resume Summary:
-#     {parsed_resume}
-#     Use the resume to personalize your greeting and tailor the system design question if applicable.
-#     {question_instruction}
-#     Your response should be a JSON object with exactly two fields, Do NOT wrap your response in markdown or code blocks:
-#     1. "spoken_message": A short, natural introduction (max ~400 characters). Include your name and invite the candidate to introduce themselves.
-#     2. "system_design_question": A concise, open-ended system design question (~10–15 words).
-#     """.strip()
-
-#     try:
-#         response = client.chat.completions.create(
-#             model="gpt-4o",
-#             messages=[
-#                 {"role": "system", "content": system_message},
-#                 {"role": "user", "content": prompt}
-#             ],
-#             temperature=0.7,
-#             max_tokens=300,
-#         )
-
-#         try:
-#             raw_content = response.choices[0].message.content.strip()
-#             print("🟡 GPT Raw Output:\n", repr(raw_content))
-
-#             if not raw_content:
-#                 raise ValueError("GPT response was empty")
-#             parsed = json.loads(raw_content)
-
-#         except Exception as e:
-#             print("❌ GPT Init Error:", str(e))
-#             raise HTTPException(status_code=500, detail="Failed to generate system design question.")
-
-#     except Exception as e:
-#         print("❌ Init error:", str(e))
-#         raise HTTPException(status_code=500, detail="Failed to generate system design question.")
-
-#     # Store history + metadata logic remains unchanged...
-#     # [UNCHANGED CODE BLOCK FOLLOWS FOR LOGGING, REDIS, RETURN]
-
-#     # ... Return same format
-#     return {
-#         "spoken_message": parsed.get("spoken_message", raw_content),
-#         "system_design_question": parsed.get("system_design_question", ""),
-#     }
 @router.post("/interview/system-design/init")
 async def init_system_design_interview(req: SystemDesignInitRequest):
     print("🧠 [System Design Init]", req.focus_system)
@@ -276,6 +198,28 @@ async def init_system_design_interview(req: SystemDesignInitRequest):
         "resume": req.resume,
     }, merge=True)
 
+    # ✅ Save conversation to Redis for follow-up
+    conversation_key = f"system_session:{req.session_id}"
+    metadata_key = f"system_session_metadata:{req.session_id}"
+
+    # Save initial conversation with system message and assistant's first response
+    redis_client.set(conversation_key, json.dumps([
+        {"role": "system", "content": system_message},
+        {"role": "assistant", "content": parsed.get("spoken_message", "")}
+    ]))
+
+    # Save metadata including the question and current phase
+    redis_client.set(metadata_key, json.dumps({
+        "current_phase": 1,
+        "question": parsed.get("system_design_question", ""),
+        "candidate_level": req.candidate_level,
+        "job_role": req.job_role
+    }))
+
+    # Set expiration for both keys
+    redis_client.expire(conversation_key, 3600)
+    redis_client.expire(metadata_key, 3600)
+
     # ✅ Return GPT output
     return {
         "spoken_message": parsed.get("spoken_message", raw_content),
@@ -330,6 +274,14 @@ async def handle_system_design_response(req: SystemDesignFollowupRequest):
         "role": "user", 
         "content": f"Current interview phase: {current_phase}. {phase_guidance.get(current_phase, '')} Provide appropriate feedback or questions to guide the candidate. Keep your response under 500 characters."
     })
+    
+    # Explicitly remind GPT of the original system design question
+    original_question = metadata.get("question", "")
+    if original_question:
+        messages.append({
+            "role": "user",
+            "content": f"Remember, the original system design question was: {original_question}"
+        })
 
     try:
         response = client.chat.completions.create(

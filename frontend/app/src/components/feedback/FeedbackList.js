@@ -3,6 +3,7 @@ import { useUser } from "../../context/UserContext";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import styles from "./FeedbackList.module.css";
 import { ClipboardList, Eye, X } from "lucide-react";
+import AzureStreamingTranscriber from "../SystemDesign/TestTrans";
 
 const FeedbackList = () => {
   const { user } = useUser();
@@ -66,6 +67,7 @@ const FeedbackList = () => {
       <h2 className={styles.title}>
         <ClipboardList size={20} style={{ marginRight: 8 }} /> Your Feedback
       </h2>
+      <AzureStreamingTranscriber />
 
       {feedbacks.length === 0 ? (
         <div className={styles.emptyState}>

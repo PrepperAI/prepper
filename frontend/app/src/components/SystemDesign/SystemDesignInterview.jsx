@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { generateFeedback } from "../../utils/getFeedback";
 import TranscriptView from "../interview-modes/TranscriptView";
 import { API_BASE_URL } from "../../utils/api";
+import StreamlinedAzureTranscriber from "./TestTrans";
 // Loading overlay component
 const LoadingOverlay = ({
   message = "Preparing your system design interview...",
@@ -44,6 +45,7 @@ const SystemDesignInterview = ({ config }) => {
   const navigate = useNavigate();
   const [permissionsGranted, setPermissionsGranted] = useState(null);
   const [loadingUserInfo, setLoadingUserInfo] = useState(true);
+  const [waitingForCompletion, setWaitingForCompletion] = useState(false);
 
   useEffect(() => {
     const getPermissions = async () => {
@@ -73,7 +75,7 @@ const SystemDesignInterview = ({ config }) => {
     // Wait for remainingAttempts to be defined
     if (!attempts || typeof attempts.systemDesign !== "number") return;
 
-    if (!user.isPremium && attempts.technical <= 0) {
+    if (!user.isPremium && attempts.systemDesign <= 0) {
       console.log("🚫 Blocking access to technical interview");
       setBlocked(true);
     }
@@ -145,16 +147,13 @@ const SystemDesignInterview = ({ config }) => {
 
   const handleFinalTranscript = async (spokenTranscript) => {
     if (!spokenTranscript || spokenTranscript.length < 2) return;
-
-    const canvasData = getCanvasImage();
-
+    // Add user message to conversation log immediately
+    setConversationLog((prev) => [
+      ...prev,
+      { role: "user", content: spokenTranscript },
+    ]);
     try {
-      // Add user message to conversation log immediately
-      setConversationLog((prev) => [
-        ...prev,
-        { role: "user", content: spokenTranscript },
-      ]);
-
+      const canvasData = getCanvasImage();
       setTranscript(spokenTranscript);
 
       const res = await fetch(`${API_BASE_URL}/api/interview/system-design`, {
@@ -453,29 +452,19 @@ const SystemDesignInterview = ({ config }) => {
           <TranscriptView
             conversationLog={conversationLog}
             aiSpeaking={aiSpeaking}
+            waitingForCompletion={waitingForCompletion}
           />
 
           {/* Live Transcriber */}
-          <LiveTranscriber
+          <StreamlinedAzureTranscriber
             aiSpeaking={aiSpeaking}
             onFinalTranscript={(newTranscript) => {
+              const cleaned = newTranscript.trim();
               if (aiSpeaking) return;
-
-              finalTranscriptBuffer.current += ` ${newTranscript}`.trim();
-
-              if (finalDebounceTimeout.current) {
-                clearTimeout(finalDebounceTimeout.current);
-              }
-
-              finalDebounceTimeout.current = setTimeout(() => {
-                if (
-                  finalTranscriptBuffer.current.trim().length > 0 &&
-                  !aiSpeaking
-                ) {
-                  handleFinalTranscript(finalTranscriptBuffer.current.trim());
-                  finalTranscriptBuffer.current = "";
-                }
-              }, 0);
+              handleFinalTranscript(cleaned);
+            }}
+            onWaitingChange={(isWaiting) => {
+              setWaitingForCompletion(isWaiting); // this is your state in parent
             }}
           />
 

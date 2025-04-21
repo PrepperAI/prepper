@@ -12,6 +12,7 @@ import BlockedModal from "../BlockedModal";
 import HeyGenAvatarStreamer from "../HeyGenAvatarStreamer";
 import { generateFeedback } from "../../utils/getFeedback";
 import { API_BASE_URL } from "../../utils/api";
+import StreamlinedAzureTranscriber from "../SystemDesign/TestTrans";
 
 const BehavioralInterview = ({ config }) => {
   const { user } = useUser();
@@ -31,6 +32,7 @@ const BehavioralInterview = ({ config }) => {
   const avatarRef = useRef();
   const [permissionsGranted, setPermissionsGranted] = useState(null);
   const [loadingUserInfo, setLoadingUserInfo] = useState(true);
+  const [waitingForCompletion, setWaitingForCompletion] = useState(false);
 
   useEffect(() => {
     const getPermissions = async () => {
@@ -58,7 +60,7 @@ const BehavioralInterview = ({ config }) => {
     const attempts = user.remainingAttempts;
 
     // Wait for remainingAttempts to be defined
-    if (!attempts || typeof attempts.technical !== "number") return;
+    if (!attempts || typeof attempts.behavioral !== "number") return;
 
     if (!user.isPremium && attempts.behavioral <= 0) {
       console.log("🚫 Blocking access to technical interview");
@@ -147,7 +149,7 @@ const BehavioralInterview = ({ config }) => {
           body: JSON.stringify({
             session_id: sessionId.current,
             interview_type: config?.interview_type || "behavioral",
-            role: config?.job_role || "Product Manager",
+            role: config?.role || "Product Manager",
             experience_level: config?.experience_level || "Entry",
             company: config?.company || null,
             stress_level: config?.stress || "Realistic",
@@ -210,6 +212,7 @@ const BehavioralInterview = ({ config }) => {
   }, [config, user]);
 
   const handleFinalTranscript = async (spokenTranscript) => {
+    console.log("iwebcibewiwifbevvbciefvhjsvhjre cjhjhvcehcvehjbcjhe");
     if (!spokenTranscript || spokenTranscript.length < 2) return;
 
     try {
@@ -225,7 +228,7 @@ const BehavioralInterview = ({ config }) => {
         body: JSON.stringify({
           session_id: sessionId.current,
           interview_type: config?.interview_type || "behavioral",
-          role: config?.job_role || "Product Manager",
+          role: config?.role || "Product Manager",
           experience_level: config?.experience_level || "Entry",
           company: config?.company || null,
           stress_level: config?.stress || "Realistic",
@@ -303,7 +306,7 @@ const BehavioralInterview = ({ config }) => {
         body: JSON.stringify({
           session_id: sessionId.current,
           interview_type: config?.interview_type || "behavioral",
-          role: config?.job_role || "Product Manager",
+          role: config?.role || "Product Manager",
           experience_level: config?.experience_level || "Entry",
           company: config?.company || null,
           stress_level: config?.stress || "Realistic",
@@ -348,7 +351,7 @@ const BehavioralInterview = ({ config }) => {
         user_id: user.uid,
         session_id: sessionId.current,
         interview_type: "behavioral",
-        job_role: config?.job_role,
+        job_role: config?.role,
         level: config?.experience_level,
         style: config?.style,
         endpointCompletion: "behavioral",
@@ -381,7 +384,7 @@ const BehavioralInterview = ({ config }) => {
         user_id: user.uid,
         session_id: sessionId.current,
         interview_type: "behavioral",
-        job_role: config?.job_role,
+        job_role: config?.role,
         level: config?.experience_level,
         style: config?.style,
         endpointCompletion: "behavioral",
@@ -432,28 +435,18 @@ const BehavioralInterview = ({ config }) => {
       <TranscriptView
         conversationLog={conversationLog}
         aiSpeaking={aiSpeaking}
+        waitingForCompletion={waitingForCompletion}
       />
 
-      <LiveTranscriber
+      <StreamlinedAzureTranscriber
         aiSpeaking={aiSpeaking}
         onFinalTranscript={(newTranscript) => {
+          const cleaned = newTranscript.trim();
           if (aiSpeaking) return;
-
-          finalTranscriptBuffer.current += ` ${newTranscript}`.trim();
-
-          if (finalDebounceTimeout.current) {
-            clearTimeout(finalDebounceTimeout.current);
-          }
-
-          finalDebounceTimeout.current = setTimeout(() => {
-            if (
-              finalTranscriptBuffer.current.trim().length > 0 &&
-              !aiSpeaking
-            ) {
-              handleFinalTranscript(finalTranscriptBuffer.current.trim());
-              finalTranscriptBuffer.current = "";
-            }
-          }, 0);
+          handleFinalTranscript(cleaned);
+        }}
+        onWaitingChange={(isWaiting) => {
+          setWaitingForCompletion(isWaiting); // this is your state in parent
         }}
       />
 
