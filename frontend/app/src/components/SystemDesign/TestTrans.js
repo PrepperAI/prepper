@@ -264,32 +264,33 @@ export default function StreamlinedAzureTranscriber({
   }, [buffer, finalizeTranscript, updateWaitingState]);
 
   return (
-    <div style={{ padding: 16, border: "1px solid #ccc", borderRadius: 8 }}>
-      <button
-        onClick={listening ? stopStream : startStream}
-        style={{
-          padding: "8px 16px",
-          background: listening ? "#d44" : "#4a4",
-          color: "#fff",
-          border: "none",
-          borderRadius: 4,
-          cursor: "pointer",
-        }}
-      >
-        {listening ? "Stop Streaming" : "Start Streaming"}
-      </button>
+    // <div style={{ padding: 16, border: "1px solid #ccc", borderRadius: 8 }}>
+    //   <button
+    //     onClick={listening ? stopStream : startStream}
+    //     style={{
+    //       padding: "8px 16px",
+    //       background: listening ? "#d44" : "#4a4",
+    //       color: "#fff",
+    //       border: "none",
+    //       borderRadius: 4,
+    //       cursor: "pointer",
+    //     }}
+    //   >
+    //     {listening ? "Stop Streaming" : "Start Streaming"}
+    //   </button>
 
-      {error && <p style={{ color: "#d44" }}>{error}</p>}
+    //   {error && <p style={{ color: "#d44" }}>{error}</p>}
 
-      <div style={{ marginTop: 16 }}>
-        <strong>Live (partial):</strong>
-        <p style={{ fontStyle: "italic" }}>{interimText || "…"}</p>
-      </div>
+    //   <div style={{ marginTop: 16 }}>
+    //     <strong>Live (partial):</strong>
+    //     <p style={{ fontStyle: "italic" }}>{interimText || "…"}</p>
+    //   </div>
 
-      <div style={{ marginTop: 16 }}>
-        <strong>Transcript (finalized):</strong>
-        <p>{finalText}</p>
-      </div>
-    </div>
+    //   <div style={{ marginTop: 16 }}>
+    //     <strong>Transcript (finalized):</strong>
+    //     <p>{finalText}</p>
+    //   </div>
+    // </div>
+    null
   );
 }
