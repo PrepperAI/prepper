@@ -61,34 +61,59 @@
   cursor: pointer;
 }
 
+/* Overlay for blur effect */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 997;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .nav-toggle {
     display: block;
+    z-index: 999;
   }
 
   .nav-links {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     right: 0;
     background-color: #0a0a0a;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 75%;
     height: 100vh;
-    padding: 2rem;
-    transform: translateY(-200%);
+    padding: 5rem 2rem 2rem;
+    transform: translateX(100%);
     transition: transform 0.3s ease;
     gap: 1.25rem;
     z-index: 998;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
   }
 
   .nav-links.show {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 
   .nav-links a,
   .get-started {
     width: 100%;
     font-size: 1.2rem;
+    padding: 0.75rem 0;
+  }
+
+  .get-started {
+    text-align: center;
+    margin-top: 1rem;
   }
 }
