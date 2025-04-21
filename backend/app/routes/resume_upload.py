@@ -42,12 +42,12 @@ import json
 router = APIRouter()
 
 # 🔐 Load GCS credentials
-if os.getenv("FIREBASE_CREDENTIALS_JSON"):
-    creds_dict = json.loads(os.getenv("FIREBASE_CREDENTIALS_JSON"))
+if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+    creds_dict = json.loads(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
     credentials = service_account.Credentials.from_service_account_info(creds_dict)
 else:
     credentials = service_account.Credentials.from_service_account_file(
-        os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        os.getenv("FIREBASE_CREDENTIALS_JSON")
     )
 
 # ✅ Initialize GCS client
