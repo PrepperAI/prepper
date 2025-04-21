@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import interview, transcribe, avatar,  technical_interview, file_upload, system_design_interview, stripe_routes, schedule_interview, feedback, resume_upload
+from routes import interview, avatar,  technical_interview, file_upload, system_design_interview, stripe_routes, schedule_interview, feedback, resume_upload
 app = FastAPI()
 
 
@@ -15,7 +15,6 @@ app.add_middleware(
 # Register the interview route
 app.include_router(interview.router, prefix="/api")
 app.include_router(avatar.router, prefix="/api")
-app.include_router(transcribe.router, prefix="/api")
 app.include_router(technical_interview.router, prefix="/api")
 app.include_router(file_upload.router, prefix='/api')
 app.include_router(system_design_interview.router, prefix='/api')
