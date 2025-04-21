@@ -78,6 +78,14 @@
   display: block;
 }
 
+/* Add this to your global CSS or to each section component as needed */
+#features,
+#pricing,
+#schedule,
+#testimonials {
+  scroll-margin-top: 80px; /* Adjust this to match your header height */
+}
+
 @media screen and (max-width: 768px) {
   .nav-toggle {
     display: block;
