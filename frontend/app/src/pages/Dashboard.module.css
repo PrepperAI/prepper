@@ -133,17 +133,21 @@
 }
 
 .avatarPlaceholder {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: #b077ff;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: white;
-  flex-shrink: 0;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+.avatarPlaceholder:hover {
+  transform: scale(1.05);
 }
 
 .userInfo {

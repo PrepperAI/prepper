@@ -175,17 +175,17 @@ const Dashboard = () => {
           onClick={() => setShowMenu((prev) => !prev)}
           ref={menuRef}
         >
-          {user?.photoURL ? (
-            <img
-              src={user.photoURL}
-              alt="User Avatar"
-              className={styles.avatar}
-            />
-          ) : (
-            <div className={styles.avatarPlaceholder}>
-              {(user?.name && user.name.charAt(0).toUpperCase()) || "?"}
-            </div>
-          )}
+          <div
+            className={styles.avatarPlaceholder}
+            style={{
+              backgroundColor: "#6366f1",
+              border: "1px solid #fff",
+              padding: "4px",
+              boxSizing: "border-box",
+            }}
+          >
+            {(user?.name && user.name.charAt(0).toUpperCase()) || "?"}
+          </div>
 
           <div className={styles.userInfo}>
             <p className={styles.userName}>{user?.name || "Guest"}</p>
