@@ -1,10 +1,9 @@
-/* src/components/Header.css */
-
+/* Base styles (keep these) */
 .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 3rem;
+  padding: 1.2rem 1.5rem;
   background-color: #0a0a0a;
   border-bottom: 1px solid #222;
   position: sticky;
@@ -17,14 +16,20 @@
   font-weight: bold;
   color: #ffffff;
   font-family: "Orbitron", sans-serif;
+  cursor: pointer;
 }
 
 .logo .accent {
-  color: #a78bfa; /* Lavender accent */
+  color: #a78bfa;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .nav-links a {
-  margin: 0 1rem;
   text-decoration: none;
   color: #ccc;
   font-weight: 500;
@@ -35,18 +40,55 @@
   color: #ffffff;
 }
 
-.cta-button button {
+.get-started {
   background: linear-gradient(135deg, #7c3aed, #a78bfa);
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1.1rem;
   border: none;
   border-radius: 8px;
   font-weight: bold;
+  font-size: 0.95rem;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s ease;
 }
 
-.cta-button button:hover {
+.get-started:hover {
   background: linear-gradient(135deg, #5b21b6, #8b5cf6);
+}
+
+.nav-toggle {
+  display: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0a0a0a;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    transform: translateY(-200%);
+    transition: transform 0.3s ease;
+    gap: 1.25rem;
+    z-index: 998;
+  }
+
+  .nav-links.show {
+    transform: translateY(0);
+  }
+
+  .nav-links a,
+  .get-started {
+    width: 100%;
+    font-size: 1.2rem;
+  }
 }
