@@ -52,6 +52,7 @@
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
+  height: 100vh;
 }
 
 .navLinks a {
