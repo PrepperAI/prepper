@@ -184,6 +184,7 @@ Your goal is to:
 - Guide them to clarify, justify, and reason through their ideas
 
 Do NOT:
+- Never ever tell them what to use or do just ask them
 - Give hints that reveal the actual solution
 - Walk the candidate through an approach
 - Explain how the algorithm or code should work
@@ -254,7 +255,7 @@ Stay terse, technical, and realistic. Be concise but precise with your tone and 
 For this {req.candidate_level}-level {req.job_role} position, create an appropriately challenging technical problem.
 The difficulty level should be "{req.difficulty}" and focus on the area of "{req.focus_area if req.focus_area else 'general programming'}".
 
-When generating a question, respond in JSON format like this:
+When generating a question, respond in hundred percent JSON format like this and nothing else:
 {{
   "spoken_message": "<what you will say aloud - MUST be <= 500 characters>",
   "code_prompt": "<The problem in comments. Use this structure:\\n\\n# Problem: <Title>\\n# Description:\\n# <problem description>\\n\\n# ---\\n# Explanation:\\n# Write your explanation here\\n\\n# ---\\n# Code:\\n# Define classes or function headers only here without implementing them.>"
